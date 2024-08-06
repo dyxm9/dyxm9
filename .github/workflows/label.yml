@@ -1,0 +1,100 @@
+# This workflow will triage pull requests and apply a label based on the
+# paths that are modified in the pull request.
+#
+# To use this workflow, you will need to set up a .github/labeler.yml
+# file with configuration.  For more information, see:
+# https://github.com/actions/labeler
+
+name: Labeler
+on: [pull_request_target]
+
+jobs:
+  label:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+    - uses: actions/labeler@v4
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#diagnosisResult {
+    margin-top: 20px;
+    font-size: 18px;
+}
+// Simulação de um banco de dados de sintomas
+const symptomDatabase = {
+    'febre': 'Você pode estar com uma infecção viral ou bacteriana.',
+    'tosse': 'Pode ser um resfriado ou uma infecção respiratória.',
+    'dor de cabeça': 'Pode ser devido a estresse, desidratação ou enxaqueca.',
+    'fadiga': 'Pode ser causada por várias condições, incluindo anemia ou estresse.',
+    // Adicione mais sintomas e diagnósticos conforme necessário
+};
+
+function getDiagnosis() {
+    const symptomsInput = document.getElementById('symptomsInput').value.toLowerCase();
+    const diagnosisResult = document.getElementById('diagnosisResult');
+    
+    // Limpar resultado anterior
+    diagnosisResult.textContent = '';
+
+    // Verificar se algum sintoma está presente na base de dados
+    let diagnosisFound = false;
+    for (const [symptom, diagnosis] of Object.entries(symptomDatabase)) {
+        if (symptomsInput.includes(symptom)) {
+            diagnosisResult.textContent = `Diagnóstico possível: ${diagnosis}`;
+            diagnosisFound = true;
+            break;
+        }
+    }
+
+    if (!diagnosisFound) {
+        diagnosisResult.textContent = 'Nenhum diagnóstico encontrado para os sintomas fornecidos.';
+    }
+}
