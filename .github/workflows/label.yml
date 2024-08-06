@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico de Sintomas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Diagnóstico de Sintomas</h1>
+        <textarea id="symptomsInput" placeholder="Digite seus sintomas aqui..."></textarea>
+        <button onclick="getDiagnosis()">Diagnosticar</button>
+        <div id="diagnosisResult"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
